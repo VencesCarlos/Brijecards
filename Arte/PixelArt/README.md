@@ -1,1 +1,1 @@
-Aqui esta todas las cartas del juego 
+Aqui estan todas las cartas del juego 
