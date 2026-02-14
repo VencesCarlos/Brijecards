@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: ReferenceImageLibrary
+  m_EditorClassIdentifier: 
+  m_GuidLow: 4960940891193533552
+  m_GuidHigh: 463788462638578340
+  m_DataStore:
+    m_Storage: []
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 5302920563190134560
+      m_GuidHigh: 10738568145595277984
+    m_SerializedTextureGuid:
+      m_GuidLow: 9936329828632951555
+      m_GuidHigh: 14829400083329756681
+    m_Size: {x: 0.2, y: 0.29538462}
+    m_SpecifySize: 1
+    m_Name: Brije1
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4639272959233550864
+      m_GuidHigh: 394949746559222433
+    m_SerializedTextureGuid:
+      m_GuidLow: 9612045351196181712
+      m_GuidHigh: 10518990405781689992
+    m_Size: {x: 0.2, y: 0.29538462}
+    m_SpecifySize: 1
+    m_Name: Brije2
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5282486339092195739
+      m_GuidHigh: 6361004415443619464
+    m_SerializedTextureGuid:
+      m_GuidLow: 4905627726500302928
+      m_GuidHigh: 17161119375672975945
+    m_Size: {x: 0.2, y: 0.29538462}
+    m_SpecifySize: 1
+    m_Name: Brije3
+    m_Texture: {fileID: 0}
