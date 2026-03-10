@@ -63,6 +63,7 @@ public class UI_Menu_Inicio : MonoBehaviour
         if (tutorialCont >= Tutorial.Length)
         {
             SceneManager.LoadScene(1);
+            return;
         }
         Tutorial[tutorialCont].SetActive(true);
         tutorialCont++;
