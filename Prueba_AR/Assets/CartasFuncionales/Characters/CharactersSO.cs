@@ -8,4 +8,7 @@ public class CharactersSO : ScriptableObject
     public int vida;
     public int ataque;
     public int magia;
+
+    [TextArea(5, 10)]  public string Descripcion;
+
 }

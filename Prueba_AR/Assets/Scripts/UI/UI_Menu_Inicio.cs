@@ -6,34 +6,12 @@ public class UI_Menu_Inicio : MonoBehaviour
 {
     public RectTransform MenuAjustes;
     public GameObject PanelFondoConfig;
-    public GameObject BotonSiguiente;
-    public GameObject PanelTutorial;
-    public GameObject[] Tutorial;
-    int tutorialCont;
-
-
-    public Toggle MostrarTutoToggle;
     //public RectTransform PanelGaleria;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DOTween.Init();
         CerrarAjustes();
-        tutorialCont = 0;
-        foreach (GameObject item in Tutorial)
-        {
-            item.SetActive(false);
-        }
-        PanelTutorial.SetActive(false);
-        BotonSiguiente.SetActive(false);
-        if (PlayerPrefs.GetInt("TutoAlways") == 1)
-        {
-            MostrarTutoToggle.isOn = true;
-        }
-        else
-        {
-            MostrarTutoToggle.isOn = false;
-        }
     }
 
     // Update is called once per frame
@@ -44,42 +22,7 @@ public class UI_Menu_Inicio : MonoBehaviour
 
     public void IniciarJuego()
     {
-        //No ha jugado
-        if (PlayerPrefs.GetInt("Juego_Iniciado") == 0 || PlayerPrefs.GetInt("TutoAlways") == 1)
-        {
-            PlayerPrefs.SetInt("Juego_Iniciado", 1);
-            PanelTutorial.SetActive(true);
-            BotonSiguiente.SetActive(true);
-            MostrarTutorial();
-        }
-        else
-        {
-            SceneManager.LoadScene(1);  //1 - AR        / 2 - No AR :)
-        }
-    }
-
-    public void MostrarTutorial()
-    {
-        if (tutorialCont >= Tutorial.Length)
-        {
-            SceneManager.LoadScene(1);
-            return;
-        }
-        Tutorial[tutorialCont].SetActive(true);
-        tutorialCont++;
-    }
-
-    public void ToggleTutorial(bool togle)
-    {
-        if (togle)
-        {
-            PlayerPrefs.SetInt("TutoAlways", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("TutoAlways", 0);
-
-        }
+        SceneManager.LoadScene(1);  //1 - AR        / 2 - No AR :)
     }
 
     public void AbrirAjustes()
@@ -111,13 +54,7 @@ public class UI_Menu_Inicio : MonoBehaviour
 
     public void AbrirGaleria()
     {
-        Debug.Log("Abrir galeria u otras cosas");
+        SceneManager.LoadScene(3);
 
-    }
-
-    public void ReiniciarPP()
-    {
-        PlayerPrefs.SetInt("Juego_Iniciado", 0);
-        PlayerPrefs.SetInt("TutoAlways", 0);
     }
 }
