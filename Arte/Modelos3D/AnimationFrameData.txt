@@ -1,9 +1,9 @@
 Frames:
 LoboIguana:
-Idle : 0 - 40
-attack: 40 - 90
-Dead: 90 - 120
-daño: 120 - 140
+Idle : 0 - 42
+attack: 42 - 106
+daño: 106 - 132
+Dead: 132 - 162
 
 DragonBri:
 idle:	0 - 20
