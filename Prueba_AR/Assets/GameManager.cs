@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
 
     DebuggerSc debuggerSc;
 
+    [SerializeField] CharactersSO[] alebrijesScr;
+    CharactersSO playerCarSO;
+    [SerializeField] CharactersSO enemyCarSO;
+
     // 0 - Iniciando / 1 - Elegir carta / 2 - Elegir ataque / 3 - Esperar Carta / 4 - Esperar Ataque / 
     // 5 - GameOver / 6 - GameSucces
 
@@ -88,7 +92,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            nombCarta = $"El enemigo usa {cardsSO.nombre}";
+            nombCarta = $"El enemigo usa \n{cardsSO.nombre}";
             debuggerSc.CambiarTexto(nombCarta, true);
             if (cardsSO.propio == true) //Al enemigo
             {
@@ -128,7 +132,7 @@ public class GameManager : MonoBehaviour
             txt_sal = "El jugador pasó su turno";
         }
         characterManager.ReiniciarStatAtq(accion);
-        CambioEstadoEspera(3, 3.5f);
+        CambioEstadoEspera(3, 4f);
         debuggerSc.CambiarTexto(txt_sal, false);
     }
 
@@ -151,7 +155,7 @@ public class GameManager : MonoBehaviour
             // Mostrar que no hace nada
         }
         //characterManager.ReiniciarStatAtq(accion); ESTO YA NO
-        CambioEstadoEspera(1, 1f);
+        CambioEstadoEspera(1, 3f);
     }
 
     public void ElegirPersonaje(int pers)
@@ -162,9 +166,13 @@ public class GameManager : MonoBehaviour
         CambioEstadoEspera(1, 3f);
     }
 
-    public void IniciarJuego()
+    public void IniciarJuego(int pAl, int eAl)
     {
-        CambioEstadoEspera(1, 5f);
+        playerCarSO = alebrijesScr[pAl];
+        enemyCarSO = alebrijesScr[eAl];
+        characterManager.PonerStats(playerCarSO);
+        enemyManager.PonerStats(enemyCarSO);
+        CambioEstadoEspera(1, 3f);
     }
 
     public void CambioEstadoEspera(int nuevoEstado, float tiempo)
@@ -197,7 +205,7 @@ public class GameManager : MonoBehaviour
         switch (nuevoEstado)
         {
             case -1:
-                CambioEstadoEspera(1, 2f);
+                CambioEstadoEspera(1, 3f);
                 break;
             case 0:
 

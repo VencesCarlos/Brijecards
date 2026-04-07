@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -20,15 +21,22 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
+        
+        BuscarPersonaje();
+
+        gameManager = FindFirstObjectByType<GameManager>();
+        debuggerSc = FindFirstObjectByType<DebuggerSc>();
+    }
+
+    public void PonerStats(CharactersSO charInfo)
+    {
+        characterInfo = charInfo;
         vida = characterInfo.vida;
         ataque = characterInfo.ataque;
         magia = characterInfo.magia;
         nombre = characterInfo.nombre;
-        BuscarPersonaje();
-        ActualizarUI();
-
-        gameManager = FindFirstObjectByType<GameManager>();
-        debuggerSc = FindFirstObjectByType<DebuggerSc>();
+        textoInfo.SetText($"HOLAAAAAAAA\nMagia: {magia}pts");
+        StartCoroutine(ActualizarUI());
     }
 
     public void BuscarPersonaje()
@@ -73,6 +81,7 @@ public class CharacterManager : MonoBehaviour
 
     public void ReiniciarStatAtq(int tipo)
     {
+        int val_Prev = 0;
         if (tipo == 2)
         {
             return;
@@ -80,13 +89,17 @@ public class CharacterManager : MonoBehaviour
 
         if (tipo == 0)
         {
+            val_Prev = ataque;
             ataque = characterInfo.ataque;
+            StartCoroutine(ActualizarUI(true, TipoCarta.Ataque, val_Prev));
         }
         else
         {
+            val_Prev = magia;
             magia = characterInfo.magia;
+            StartCoroutine(ActualizarUI(true, TipoCarta.Magia, val_Prev));
         }
-        ActualizarUI();
+
     }
 
     public void CambiarStats(TipoCarta tipo, int cantidad)
@@ -101,43 +114,46 @@ public class CharacterManager : MonoBehaviour
             Aum = "disminuyo";
         }
         string txt_sal = $"{nombre} {Aum} su {tipo} en {cantidad}";
-        debuggerSc.CambiarTexto(txt_sal, false);
+        //debuggerSc.CambiarTexto(txt_sal, false);
+        //CAMBIARSTATS
+        int valPrev = 0;
         switch (tipo)
         {
             case TipoCarta.Vida:
+                valPrev = vida;
                 vida += cantidad;
                 break;
             case TipoCarta.Magia:
+                valPrev = magia;
                 magia += cantidad;
                 break;
             case TipoCarta.Ataque:
+                valPrev = ataque;
                 ataque += cantidad;
                 break;
             default:
                 break;
         }
-        ActualizarUI();
+        StartCoroutine(ActualizarUI(true, tipo, valPrev));
     }
 
     public void RecibirAtaque(int cantidad)
     {
         debuggerSc = FindFirstObjectByType<DebuggerSc>();
         string txt_sal = $"El jugador perdió {cantidad} de vida. Pasó de {vida} a {vida - cantidad}";
-        debuggerSc.CambiarTexto(txt_sal, true);
+        //debuggerSc.CambiarTexto(txt_sal, true);
+        //CAMBIARSTATS
+        int valPrev = vida;
         vida -= cantidad;
-        ActualizarUI();
+        StartCoroutine(ActualizarUI(true, TipoCarta.Vida, valPrev));
     }
 
-    public void ActualizarUI()
+    public IEnumerator ActualizarUI(bool mark=false, TipoCarta tipo= TipoCarta.Magia, int valorPrev=0)
     {
-        textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
-        
-        Debug.Log($"Cambiando stats char: {nombre}\nVida: { vida} pts\nAtaque: { ataque} pts\nMagia: { magia} pts");
-        
         if (vida <= 0)
         {
             vida = 0;
-            gameManager.CambioEstadoEspera(5, 0f);
+            gameManager.CambioEstadoEspera(5, 4f);
             Debug.Log("Vita menore ziro");
             Morir();
 
@@ -147,5 +163,29 @@ public class CharacterManager : MonoBehaviour
             Morir();
         }
 
+        
+        if (mark)
+        {
+            switch (tipo)
+            {
+                case TipoCarta.Vida:
+                    textoInfo.SetText($"{nombre}\nVida: {valorPrev} -> {vida} pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
+                    break;
+                case TipoCarta.Magia:
+                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {valorPrev} -> {magia} pts");
+                    break;
+                case TipoCarta.Ataque:
+                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {valorPrev} -> {ataque} pts\nMagia: {magia}pts");
+                    break;
+                default:
+                    break;
+            }
+            yield return new WaitForSeconds(3.0f);
+
+        }
+
+        textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
+
+        Debug.Log($"Cambiando stats char: {nombre}\nVida: { vida} pts\nAtaque: { ataque} pts\nMagia: { magia} pts");
     }
 }

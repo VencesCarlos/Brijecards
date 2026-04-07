@@ -80,14 +80,10 @@ CURACION/CURACION'T = 30%
         gameManager = FindFirstObjectByType<GameManager>();
 
         DOTween.Init();
-        nombre = enemyInfo.nombre;
-        vida = enemyInfo.vida;
-        ataque = enemyInfo.ataque;
-        magia = enemyInfo.magia;
 
         debuggerSc = FindFirstObjectByType<DebuggerSc>();
 
-        ActualizarUI();
+        //ActualizarUI();
         
         for (int i = 0; i < 3; i++)
         {
@@ -97,10 +93,14 @@ CURACION/CURACION'T = 30%
         //Debug.Log("Mazo enemigo:" + CartasEscogidas[0].name + " - " + CartasEscogidas[1].name + " - " + CartasEscogidas[2].name + " - ");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PonerStats(CharactersSO charInfo)
     {
-        
+        enemyInfo = charInfo;
+        vida = enemyInfo.vida;
+        ataque = enemyInfo.ataque;
+        magia = enemyInfo.magia;
+        nombre = enemyInfo.nombre;
+        StartCoroutine(ActualizarUI());
     }
 
     public void CambiarCarta(int carta) // carta 0-2
@@ -122,7 +122,7 @@ CURACION/CURACION'T = 30%
         //Debug.Log("Mazo enemigo:" + CartasEscogidas[0].name + " - " + CartasEscogidas[1].name + " - " + CartasEscogidas[2].name + " - ");
         //Agregar Animacion de carta
         //Luego de la animacion (o a la par llamar a )
-        string texto_Desc = $"El enemigo usa {cartaElegida.nombre}";
+        string texto_Desc = $"El enemigo usa \n{cartaElegida.nombre}";
         debuggerSc.CambiarTexto(texto_Desc, true);
         StartCoroutine(MostrarCarta());
     }
@@ -134,7 +134,7 @@ CURACION/CURACION'T = 30%
         Sequence sequence = DOTween.Sequence();
         sequence.Append(ImgCartaEnem.DOMove(PosicionCentro.position, 0.3f)); //On complete Poner hacer la accion
         sequence.Append(ImgCartaEnem.DOScale(0.8f, 0.2f));
-        sequence.Append(ImgCartaEnem.DOScale(1.2f, 0.2f).SetDelay(1.0f).OnComplete(HacerEfectoCarta));
+        sequence.Append(ImgCartaEnem.DOScale(1.2f, 0.2f).SetDelay(0.9f).OnComplete(HacerEfectoCarta));
         sequence.Append(ImgCartaEnem.DOMove(PosicionFuera.position, 1.0f).SetDelay(3.0f).OnComplete(TerminarTurnoCarta));
         sequence.Join(ImgCartaEnem.DOScale(0.3f, 0.5f));
 
@@ -148,7 +148,7 @@ CURACION/CURACION'T = 30%
 
     private void TerminarTurnoCarta()
     {
-        gameManager.CambioEstadoEspera(4, 3.5f);
+        gameManager.CambioEstadoEspera(4, 4f);
     }
 
     public void EscogerAccion()
@@ -174,11 +174,12 @@ CURACION/CURACION'T = 30%
         }
         Debug.Log("Accion elegida num:" + accion);
         string txt_sal = $"El enemigo {accion}";
-        debuggerSc.CambiarTexto(txt_sal, false);
+        debuggerSc.CambiarTexto(txt_sal, true);
     }
 
     public void ReiniciarStatAtq(int tipo)
     {
+        int val_Prev = 0;
         if (tipo == 2)
         {
             return;
@@ -186,13 +187,16 @@ CURACION/CURACION'T = 30%
 
         if (tipo == 0)
         {
+            val_Prev = ataque;
             ataque = enemyInfo.ataque;
+            StartCoroutine(ActualizarUI(true, TipoCarta.Ataque, val_Prev));
         }
         else
         {
+            val_Prev = magia;
             magia = enemyInfo.magia;
+            StartCoroutine(ActualizarUI(true, TipoCarta.Magia, val_Prev));
         }
-        ActualizarUI();
     }
 
     public void CambiarStats(TipoCarta tipo, int cantidad)
@@ -207,41 +211,67 @@ CURACION/CURACION'T = 30%
             Aum = "disminuyo";
         }
         string txt_sal = $"{nombre} {Aum} su {tipo} en {cantidad}";
-        debuggerSc.CambiarTexto(txt_sal, false);
+        //debuggerSc.CambiarTexto(txt_sal, false);
+        //CAMBIARSTATS
 
+        int valPrev = 0;
         switch (tipo)
         {
             case TipoCarta.Vida:
+                valPrev = vida;
                 vida += cantidad;
                 break;
             case TipoCarta.Magia:
+                valPrev = magia;
                 magia += cantidad;
                 break;
             case TipoCarta.Ataque:
+                valPrev = ataque;
                 ataque += cantidad;
                 break;
             default:
                 break;
         }
-        ActualizarUI();
+        StartCoroutine(ActualizarUI(true, tipo, valPrev));
     }
 
     public void RecibirAtaque(int cantidad)
     {
+        int valPrev = vida;
         vida -= cantidad;
-        ActualizarUI();
+        StartCoroutine(ActualizarUI(true, TipoCarta.Vida, valPrev));
     }
 
-    public void ActualizarUI()
+    public IEnumerator ActualizarUI(bool mark = false, TipoCarta tipo = TipoCarta.Magia, int valorPrev = 0)
     {
         if (vida <= 0)
         {
             vida = 0;
-            gameManager.CambioEstadoEspera(6, 0f);
+            gameManager.CambioEstadoEspera(6, 4f);
             Morir();
         }
-        textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {magia}pts"); 
-        Debug.Log($"Cambiando stats enem: { nombre}\nVida: { vida} pts\nAtaque: { ataque} pts\nMagia: { magia} pts");
+        if (mark)
+        {
+            switch (tipo)
+            {
+                case TipoCarta.Vida:
+                    textoInfo.SetText($"{nombre}\nVida: {valorPrev} -> {vida} pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
+                    break;
+                case TipoCarta.Magia:
+                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {valorPrev} -> {magia} pts");
+                    break;
+                case TipoCarta.Ataque:
+                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {valorPrev} -> {ataque} pts\nMagia: {magia}pts");
+                    break;
+                default:
+                    break;
+            }
+            yield return new WaitForSeconds(3.0f);
+
+        }
+        textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
+
+        Debug.Log($"Cambiando stats char: {nombre}\nVida: { vida} pts\nAtaque: { ataque} pts\nMagia: { magia} pts");
     }
 
     public void Atacar()

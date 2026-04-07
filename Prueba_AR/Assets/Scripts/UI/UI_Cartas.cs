@@ -17,6 +17,8 @@ public class UI_Cartas : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] private GameManager gameManager;
     [SerializeField] private RectTransform PosicionCentro;
 
+    [SerializeField] private float distUpY = 25.0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,7 +67,7 @@ public class UI_Cartas : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         // Por ejemplo, cambiar el color de la imagen
         GetComponent<UnityEngine.UI.Image>().color = new Color32(184,230,230,255);
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(ImgCarta.DOMoveY(PosicionOriginal_Ar.y + 25, 0.1f));
+        sequence.Append(ImgCarta.DOMoveY(PosicionOriginal_Ar.y + distUpY, 0.1f));
         //sequence.Append(ImgCarta.DOScale(1f, 0.3f));
     }
 
@@ -153,7 +155,7 @@ public class UI_Cartas : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (gameManager != null)
         {
             gameManager.UtilizarCarta(cartaActual, true);
-            gameManager.CambioEstadoEspera(2, 2.5f);
+            gameManager.CambioEstadoEspera(2, 4f);
 
         }
         //gameObject.SetActive(false);

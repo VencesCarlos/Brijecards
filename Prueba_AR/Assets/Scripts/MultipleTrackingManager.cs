@@ -26,9 +26,17 @@ public class MultipleTrackingManager : MonoBehaviour
 
     private void Start()
     {
+        ARSession session = FindFirstObjectByType<ARSession>();
+        if (session != null)
+        {
+            session.Reset();
+        }
+
         gameManager = FindFirstObjectByType<GameManager>();
 
         _trackedImageManager = GetComponent<ARTrackedImageManager>();
+        _trackedImageManager.enabled = false;
+        _trackedImageManager.enabled = true;
         if (_trackedImageManager == null) return;
         _trackedImageManager.trackablesChanged.AddListener(OnImagesTrackedChanged);
         _arObjects = new Dictionary<string, GameObject>();
@@ -55,7 +63,13 @@ public class MultipleTrackingManager : MonoBehaviour
         {
             var arObject = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             arObject.name = prefab.name;
+            
+            GenEnemigo genEnemigo = arObject.gameObject.transform.GetComponentInChildren<GenEnemigo>();
+            genEnemigo.MostrarEnemigo(PlayerPrefs.GetInt("EnemyID"));
+            
             arObject.gameObject.SetActive(false);
+
+            
             _arObjects.Add(arObject.name, arObject);
         }
     }
@@ -99,13 +113,32 @@ public class MultipleTrackingManager : MonoBehaviour
         if (!isStarted)
         {
             isStarted = true;
-            gameManager.CambioEstadoEspera(1, 3f);
+            int enemyID = PlayerPrefs.GetInt("EnemyID");
+            switch (trackedImage.referenceImage.name)
+            {
+                case "Brije1_Game":
+                    gameManager.IniciarJuego(0, enemyID);
+                    break;
+                case "Brije3_Game":
+                    gameManager.IniciarJuego(2, enemyID);
+                    break;
+                case "Brije2_Game":
+                    gameManager.IniciarJuego(1, enemyID);
+                    break;
+                default:
+                    gameManager.IniciarJuego(2, enemyID);
+                    break;
+            }
+            
+            
+            UISearching.SetActive(false);
         }
         
         //Activar objeto y ubicar sobre la carta
         _arObjects[trackedImage.referenceImage.name].gameObject.SetActive(true);
         _arObjects[trackedImage.referenceImage.name].transform.position = trackedImage.transform.position;
         _arObjects[trackedImage.referenceImage.name].transform.rotation = trackedImage.transform.rotation;
+        
 
         //prueba.SetActive(true);
         if (isInCamera)

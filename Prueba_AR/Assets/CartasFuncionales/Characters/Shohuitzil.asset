@@ -17,4 +17,6 @@ MonoBehaviour:
   vida: 18
   ataque: 8
   magia: 8
-  Descripcion: Guau, soy un lobo :P
+  Descripcion: "Cuetz'Tlachi Colli\nEl m\xE1s fuerte del antiguo clan b\xE1rbaro,
+    encerrado y torturado por W.E.R.O. durante d\xE9cadas. Ahora que se ha liberado,
+    prometi\xF3 vengarse de aquellos que lo atormentaron."

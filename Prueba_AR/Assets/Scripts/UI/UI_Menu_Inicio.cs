@@ -6,12 +6,15 @@ public class UI_Menu_Inicio : MonoBehaviour
 {
     public RectTransform MenuAjustes;
     public GameObject PanelFondoConfig;
+    
+    public GameObject PanelElegirEnemigo;
     //public RectTransform PanelGaleria;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DOTween.Init();
         CerrarAjustes();
+        PanelElegirEnemigo.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,7 +25,19 @@ public class UI_Menu_Inicio : MonoBehaviour
 
     public void IniciarJuego()
     {
+        PanelElegirEnemigo.SetActive(true);
+    }
+
+    public void EleccionEnemigo(int idEnemy)
+    {
+
+        PlayerPrefs.SetInt("EnemyID", idEnemy);
         SceneManager.LoadScene(1);  //1 - AR        / 2 - No AR :)
+    }
+
+    public void CerrarInicioJuego()
+    {
+        PanelElegirEnemigo.SetActive(false);
     }
 
     public void AbrirAjustes()

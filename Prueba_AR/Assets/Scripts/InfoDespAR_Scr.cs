@@ -17,6 +17,6 @@ public class InfoDespAR_Scr : MonoBehaviour
 
     public void Salir()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
     }
 }

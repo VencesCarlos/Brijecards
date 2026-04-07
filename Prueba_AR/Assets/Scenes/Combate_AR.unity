@@ -796,6 +796,10 @@ PrefabInstance:
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2589741172759502172, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
+      propertyPath: distUpY
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589741172759502172, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1740957262}
@@ -853,7 +857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3565081797094231859, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -276.3884
+      value: -392
       objectReference: {fileID: 0}
     - target: {fileID: 3799084910966498006, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: m_Name
@@ -865,7 +869,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4100713605464289777, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -276.3884
+      value: -392
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179229731457614392, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
+      propertyPath: distUpY
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4179229731457614392, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: gameManager
@@ -901,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6478812455978335043, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -245.3883
+      value: -360.9999
       objectReference: {fileID: 0}
     - target: {fileID: 7467483647265643697, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -911,6 +919,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1740957262}
+    - target: {fileID: 8905414811468300265, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
+      propertyPath: distUpY
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 8905414811468300265, guid: ff374db9805f78148819e8a5a5f018de, type: 3}
       propertyPath: gameManager
       value: 
