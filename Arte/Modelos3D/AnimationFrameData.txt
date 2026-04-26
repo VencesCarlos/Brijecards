@@ -1,0 +1,18 @@
+Frames:
+LoboIguana:
+Idle : 0 - 42
+attack: 42 - 106
+daño: 106 - 132
+Dead: 132 - 162
+
+DragonBri:
+idle:	0 - 29
+daño:	29 - 69
+ataque:	69 - 119
+muerto:	119 - 160
+
+sonQuatl:
+ataque:	0 - 40
+idle:	41 - 74
+daño:	75 - 110
+muerto:	110 - 141
