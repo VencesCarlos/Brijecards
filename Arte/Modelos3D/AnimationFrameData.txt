@@ -6,13 +6,13 @@ daño: 106 - 132
 Dead: 132 - 162
 
 DragonBri:
-idle:	0 - 20
-daño:	20 - 50
-ataque:	50 - 90
-muerto:	90 - 130
+idle:	0 - 29
+daño:	29 - 69
+ataque:	69 - 119
+muerto:	119 - 160
 
 sonQuatl:
-idle:	30 - 60
-daño:	60 - 90
-ataque:	0 - 30
-muerto:	90 - 120
+ataque:	0 - 40
+idle:	41 - 74
+daño:	75 - 110
+muerto:	110 - 141
