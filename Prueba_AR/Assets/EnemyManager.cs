@@ -252,21 +252,34 @@ CURACION/CURACION'T = 30%
         }
         if (mark)
         {
+            string color = "blue";
             switch (tipo)
             {
                 case TipoCarta.Vida:
-                    textoInfo.SetText($"{nombre}\nVida: {valorPrev} -> {vida} pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
+                    if (vida > valorPrev)
+                        color = "green";
+                    else
+                        color = "red";
+                    textoInfo.SetText($"{nombre}\nVida: {valorPrev} -> <color={color}>{vida}</color> pts\nAtaque: {ataque}pts\nMagia: {magia}pts");
                     break;
                 case TipoCarta.Magia:
-                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {valorPrev} -> {magia} pts");
+                    if (magia > valorPrev)
+                        color = "green";
+                    else
+                        color = "red";
+                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {valorPrev} -> <color={color}>{magia}</color> pts");
                     break;
                 case TipoCarta.Ataque:
-                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {valorPrev} -> {ataque} pts\nMagia: {magia}pts");
+                    if (ataque > valorPrev)
+                        color = "green";
+                    else
+                        color = "red";
+                    textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {valorPrev} -> <color={color}>{ataque}</color> pts\nMagia: {magia}pts");
                     break;
                 default:
                     break;
             }
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(3.8f);
 
         }
         textoInfo.SetText($"{nombre}\nVida: {vida}pts\nAtaque: {ataque}pts\nMagia: {magia}pts");

@@ -4015,6 +4015,10 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
+      propertyPath: MusFinJuego
+      value: 
+      objectReference: {fileID: 1740957264}
+    - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
       propertyPath: AbajoBotones
       value: 
       objectReference: {fileID: 4868688669653310243}
@@ -4047,9 +4051,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7540988548019210498}
     - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
+      propertyPath: audiosClip.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
       propertyPath: alebrijesScr.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
+      propertyPath: 'audiosClip.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4307d6f982c0a9e499f1c2bee75ae356, type: 3}
+    - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
+      propertyPath: 'audiosClip.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 6bc86277d9ee7694282f5405b4d5e972, type: 3}
     - target: {fileID: 2090488634539836541, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
       propertyPath: 'alebrijesScr.Array.data[0]'
       value: 
@@ -4141,6 +4157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44dc59d652eb80d41a7df8596a307865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1740957264 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7338128222895483542, guid: 5b323fbc2030b624fac06608ae809fbc, type: 3}
+  m_PrefabInstance: {fileID: 1740957261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900745156
 GameObject:
   m_ObjectHideFlags: 0
@@ -6035,7 +6056,7 @@ MonoBehaviour:
   cardsManager: {fileID: 1740957263}
   gameManager: {fileID: 1740957262}
   PosicionCentro: {fileID: 9188624706318717385}
-  distUpY: 200
+  distUpY: 310
 --- !u!1 &2643483443485881965
 GameObject:
   m_ObjectHideFlags: 0
@@ -6581,7 +6602,7 @@ MonoBehaviour:
   cardsManager: {fileID: 1740957263}
   gameManager: {fileID: 1740957262}
   PosicionCentro: {fileID: 9188624706318717385}
-  distUpY: 200
+  distUpY: 310
 --- !u!1 &4285679950376406256
 GameObject:
   m_ObjectHideFlags: 0
@@ -8192,7 +8213,7 @@ MonoBehaviour:
   cardsManager: {fileID: 1740957263}
   gameManager: {fileID: 1740957262}
   PosicionCentro: {fileID: 9188624706318717385}
-  distUpY: 200
+  distUpY: 300
 --- !u!1 &8935361051924604738
 GameObject:
   m_ObjectHideFlags: 0

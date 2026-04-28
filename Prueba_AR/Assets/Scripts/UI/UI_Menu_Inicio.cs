@@ -8,6 +8,12 @@ public class UI_Menu_Inicio : MonoBehaviour
     public GameObject PanelFondoConfig;
     
     public GameObject PanelElegirEnemigo;
+
+    public Image PanelTutorial;
+    public Sprite[] spriteTutos;
+
+    int contTuto;
+
     //public RectTransform PanelGaleria;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,6 +21,7 @@ public class UI_Menu_Inicio : MonoBehaviour
         DOTween.Init();
         CerrarAjustes();
         PanelElegirEnemigo.SetActive(false);
+        contTuto = 0;
     }
 
     // Update is called once per frame
@@ -25,7 +32,9 @@ public class UI_Menu_Inicio : MonoBehaviour
 
     public void IniciarJuego()
     {
-        PanelElegirEnemigo.SetActive(true);
+        PanelTutorial.transform.parent.gameObject.SetActive(true);
+        PanelTutorial.sprite = spriteTutos[contTuto];
+        //PanelElegirEnemigo.SetActive(true);
     }
 
     public void EleccionEnemigo(int idEnemy)
@@ -71,5 +80,19 @@ public class UI_Menu_Inicio : MonoBehaviour
     {
         SceneManager.LoadScene(3);
 
+    }
+
+    public void SiguienteTuto()
+    {
+        contTuto++;
+        if (contTuto >= spriteTutos.Length)
+        {
+            //Iniciar juego random
+            int rand = Random.Range(0, spriteTutos.Length);
+            EleccionEnemigo(rand);
+            return;
+        }
+
+        PanelTutorial.sprite = spriteTutos[contTuto];
     }
 }

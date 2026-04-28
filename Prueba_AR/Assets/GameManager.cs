@@ -24,7 +24,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] int estado = -1;
 
     [SerializeField] AudioSource MusFondo;
-    [SerializeField] AudioSource GameOver;
+    [SerializeField] AudioSource MusFinJuego;
+    [SerializeField] AudioClip[] audiosClip;
+    // 0 - Derrota / Gameover
+    // 1 - Victoria
 
     [SerializeField] GameObject BotonesPersonajes;
     [SerializeField] GameObject[] PersonajesObjs;
@@ -238,13 +241,15 @@ public class GameManager : MonoBehaviour
                 sequence_C5.Append(PantallaGameOver.DOLocalMoveY(0f, 0.4f).SetDelay(4.0f));
                 Debug.Log("Ya me mori");
                 juegoTerminado = true;
+                MusFinJuego.clip = audiosClip[0];
                 StartCoroutine(GoToMenu());
 
-                break; // Jugador gana
-            case 6:
+                break; 
+            case 6:// Jugador gana
                 Sequence sequence_C6 = DOTween.Sequence();
                 sequence_C6.Append(PantallaGameSucces.DOLocalMoveY(0f, 0.4f).SetDelay(4.0f));
                 juegoTerminado = true;
+                MusFinJuego.clip = audiosClip[1];
                 StartCoroutine(GoToMenu());
                 break;
             default:
@@ -255,8 +260,8 @@ public class GameManager : MonoBehaviour
     public IEnumerator GoToMenu()
     {
         MusFondo.enabled = false;
-        GameOver.enabled = true;
-        GameOver.Play();
+        MusFinJuego.enabled = true;
+        MusFinJuego.Play();
 
         
         yield return new WaitForSeconds(10f);
