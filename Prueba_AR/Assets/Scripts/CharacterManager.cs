@@ -91,13 +91,19 @@ public class CharacterManager : MonoBehaviour
         {
             val_Prev = ataque;
             ataque = characterInfo.ataque;
-            StartCoroutine(ActualizarUI(true, TipoCarta.Ataque, val_Prev));
+            if (val_Prev == ataque)
+                StartCoroutine(ActualizarUI());
+            else
+                StartCoroutine(ActualizarUI(true, TipoCarta.Ataque, val_Prev));
         }
         else
         {
             val_Prev = magia;
             magia = characterInfo.magia;
-            StartCoroutine(ActualizarUI(true, TipoCarta.Magia, val_Prev));
+            if (val_Prev == magia)
+                StartCoroutine(ActualizarUI());
+            else
+                StartCoroutine(ActualizarUI(true, TipoCarta.Magia, val_Prev));
         }
 
     }

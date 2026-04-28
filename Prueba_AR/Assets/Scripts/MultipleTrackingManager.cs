@@ -15,6 +15,7 @@ public class MultipleTrackingManager : MonoBehaviour
     private Dictionary<string, GameObject> _arObjects;
 
     GameManager gameManager;
+    string primerEncontrado;
 
     //public GameObject prueba;
 
@@ -45,6 +46,7 @@ public class MultipleTrackingManager : MonoBehaviour
         isStarted = false;
         UISearching.SetActive(true);
         cronom = 0f;
+        primerEncontrado = "";
     }
 
     private void Update()
@@ -129,9 +131,15 @@ public class MultipleTrackingManager : MonoBehaviour
                     gameManager.IniciarJuego(2, enemyID);
                     break;
             }
-            
+
+            primerEncontrado = trackedImage.referenceImage.name;
             
             UISearching.SetActive(false);
+        }
+
+        if (trackedImage.referenceImage.name != primerEncontrado)
+        {
+            return;
         }
         
         //Activar objeto y ubicar sobre la carta

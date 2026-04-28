@@ -189,13 +189,19 @@ CURACION/CURACION'T = 30%
         {
             val_Prev = ataque;
             ataque = enemyInfo.ataque;
-            StartCoroutine(ActualizarUI(true, TipoCarta.Ataque, val_Prev));
+            if (val_Prev==ataque)
+                StartCoroutine(ActualizarUI());
+            else
+                StartCoroutine(ActualizarUI(true, TipoCarta.Ataque, val_Prev));
         }
         else
         {
             val_Prev = magia;
             magia = enemyInfo.magia;
-            StartCoroutine(ActualizarUI(true, TipoCarta.Magia, val_Prev));
+            if (val_Prev == magia)
+                StartCoroutine(ActualizarUI());
+            else
+                StartCoroutine(ActualizarUI(true, TipoCarta.Magia, val_Prev));
         }
     }
 
