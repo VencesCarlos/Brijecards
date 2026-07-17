@@ -9,6 +9,8 @@ public class UI_Menu_Inicio : MonoBehaviour
     
     public GameObject PanelElegirEnemigo;
 
+    public RectTransform PanelMostrarInfo;
+
     public Image PanelTutorial;
     public Sprite[] spriteTutos;
 
@@ -67,6 +69,22 @@ public class UI_Menu_Inicio : MonoBehaviour
         PanelFondoConfig.SetActive(false);
         sequence.Append(MenuAjustes.DOScale(0.1f, 0.2f));
         sequence.Join(MenuAjustes.DOLocalMoveY(800, 0.1f).SetDelay(0.1f));
+    }
+
+    public void MostrarInfo()
+    {
+        Sequence sequence = DOTween.Sequence();
+        PanelFondoConfig.SetActive(true);
+        sequence.Append(PanelMostrarInfo.DOLocalMoveY(0, 0.1f));
+        sequence.Append(PanelMostrarInfo.DOScale(1f, 0.3f));
+    }
+
+    public void CerrarInfo()
+    {
+        Sequence sequence = DOTween.Sequence();
+        PanelFondoConfig.SetActive(false);
+        sequence.Append(PanelMostrarInfo.DOScale(0.1f, 0.2f));
+        sequence.Join(PanelMostrarInfo.DOLocalMoveY(800, 0.1f).SetDelay(0.1f));
     }
 
     public void SalirApp()
